@@ -1,4 +1,4 @@
-package com.svs.Client;
+package com.svs.client;
 
 import java.io.*;
 import java.net.Socket;
@@ -30,5 +30,24 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        new Thread(() -> {
+            try{
+                while (true) {
+                    System.out.println("Поток запущен.");
+                }
+            } finally{
+                try {
+                    socket.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }).start();
+
+
+
+
     }
 }

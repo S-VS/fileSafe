@@ -1,28 +1,25 @@
-package com.svs.Common;
+package com.svs.common;
 
 import java.sql.*;
 
-public class DataBaseFS {
+public class DataBaseFS implements Credentials {
     private static Connection connection;
     private static Statement statement;
-    private static final String URL = "jdbc:mysql://localhost:3306/dbfilesafe?useSSL=false";
-    private static final String USERNAMEDB = "root";
-    private static final String PASSWORDDB = "123456";
-    private String login;
-    private String password;
 
+    private String select;
+    private String answer;
 
     public DataBaseFS() {
-        this.login = login;
-        this.password = password;
+        this.select = select;
+        this.answer = answer;
     }
 
-    public String checkUserPass(String login, String password) {
+    public String selectDataBase(String select, String answer) {
         try {
             connect();
-            ResultSet resultSetLogin = statement.executeQuery("SELECT id, login, password FROM user WHERE login = '" + login + "' AND password = '" + password + "';");
-            while (resultSetLogin.next()) {
-                return "Добро пожаловать";
+            ResultSet resultSelect = statement.executeQuery(select);
+            while (resultSelect.next()) {
+                return answer;
             }
         } catch (SQLException e) {
             e.printStackTrace();
